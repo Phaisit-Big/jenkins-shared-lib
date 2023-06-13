@@ -1,6 +1,6 @@
 def call(image,port) {
    pipeline {
-    agent { label "lo"}
+    agent { label "dev1"}
     parameters {
         string(name: 'VERSION', trim: true)
     }
