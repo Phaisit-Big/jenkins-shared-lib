@@ -1,6 +1,6 @@
 def call(image,port) {
    pipeline {
-    agent { label "dev1"}
+    agent { label "lo"}
     parameters {
         string(name: 'VERSION', trim: true)
     }
@@ -8,11 +8,8 @@ def call(image,port) {
         stage('Build & Push') {
             steps{
                 script{
-                    withDockerRegistry(credentialsId: "dockerhub") {
                         docker=docker.build(image, "--platform linux/amd64 --build-arg --no-cache --pull --force-rm -f Dockerfile .")
-                        docker.push(params.VERSION)
                         cleanWs()
-                    }
                 }
             }
         }
